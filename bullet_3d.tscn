@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://mldkyxtjrh32"]
+
+[ext_resource type="Script" uid="uid://by7ouwsq43id8" path="res://Bullet.cs" id="1_y2jmw"]
+
+[ext_resource type="Script" path="res://DamagingComponent.cs" id="2_damage"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cyxl"]
+albedo_color = Color(0.52, 1, 0.19, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_whvym"]
+material = SubResource("StandardMaterial3D_5cyxl")
+radius = 0.2
+height = 0.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_whvym"]
+radius = 0.2
+height = 0.7
+
+[node name="Bullet" type="Node3D" unique_id=1013024712 groups=["bullets"]]
+script = ExtResource("1_y2jmw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1612090946]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_whvym")
+
+[node name="DamagingComponent" type="Area3D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("2_damage")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamagingComponent" unique_id=508148867]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.9956128e-09, -0.045654297)
+shape = SubResource("CapsuleShape3D_whvym")

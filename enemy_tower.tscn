@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cohmikoj6r580"]
+
+[ext_resource type="Script" uid="uid://c72fc7s3xs3mu" path="res://EnemyTower.cs" id="1_ukqqp"]
+[ext_resource type="Script" uid="uid://1ae07wbjgp54" path="res://ShootComponent.cs" id="1_x8mbd"]
+[ext_resource type="Script" uid="uid://csksxmuq44jgs" path="res://HealthComponent.cs" id="2_buofx"]
+[ext_resource type="PackedScene" path="res://enemy_bullet_3d.tscn" id="2_h1qj6"]
+[ext_resource type="Script" uid="uid://vn5udh2ir6uu" path="res://MoveComponent.cs" id="3_h1qj6"]
+[ext_resource type="Script" uid="uid://dftkftvwkf48v" path="res://VisibilityComponent.cs" id="4_buofx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0ym2"]
+albedo_color = Color(1, 0.40392157, 0.43137255, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_whvym"]
+material = SubResource("StandardMaterial3D_g0ym2")
+bottom_radius = 1.0
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_whvym"]
+margin = 0.0
+height = 1.5
+radius = 1.0
+
+[node name="enemy_tower" type="StaticBody3D" unique_id=51730807 groups=["enemies"]]
+script = ExtResource("1_ukqqp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=230550405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_whvym")
+
+[node name="ShootComponent" type="Node" parent="." unique_id=1993311130]
+script = ExtResource("1_x8mbd")
+BulletScene = ExtResource("2_h1qj6")
+metadata/_custom_type_script = "uid://1ae07wbjgp54"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1114621305]
+script = ExtResource("2_buofx")
+MaxHealth = 125
+metadata/_custom_type_script = "uid://csksxmuq44jgs"
+
+[node name="MoveComponent" type="Node" parent="." unique_id=1246267157]
+script = ExtResource("3_h1qj6")
+metadata/_custom_type_script = "uid://vn5udh2ir6uu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=862375902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_whvym")
+
+[node name="VisibilityComponent" type="Node3D" parent="." unique_id=125597160]
+script = ExtResource("4_buofx")
+ViewRange = 7.0
+metadata/_custom_type_script = "uid://dftkftvwkf48v"

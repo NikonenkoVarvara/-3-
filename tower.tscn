@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cstivh23u3t52"]
+
+[ext_resource type="Script" uid="uid://csksxmuq44jgs" path="res://HealthComponent.cs" id="1_vedim"]
+[ext_resource type="Script" uid="uid://dq0ebvu2sm0d7" path="res://Tower.cs" id="1_vxmma"]
+[ext_resource type="Script" uid="uid://1ae07wbjgp54" path="res://ShootComponent.cs" id="2_stebd"]
+[ext_resource type="PackedScene" uid="uid://mldkyxtjrh32" path="res://bullet_3d.tscn" id="3_jbe1c"]
+[ext_resource type="Script" uid="uid://dftkftvwkf48v" path="res://VisibilityComponent.cs" id="3_stebd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0ym2"]
+albedo_color = Color(1, 0.40392157, 0.43137255, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_whvym"]
+material = SubResource("StandardMaterial3D_g0ym2")
+bottom_radius = 1.0
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhy6b"]
+albedo_color = Color(0.5882353, 1, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3a6tt"]
+height = 1.5
+radius = 1.0
+
+[node name="tower" type="StaticBody3D" unique_id=580240673 groups=["PlayerStructures"]]
+script = ExtResource("1_vxmma")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=982434194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_whvym")
+surface_material_override/0 = SubResource("StandardMaterial3D_bhy6b")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=89541588]
+script = ExtResource("1_vedim")
+MaxHealth = 250
+metadata/_custom_type_script = "uid://csksxmuq44jgs"
+
+[node name="ShootComponent" type="Node" parent="." unique_id=1041213318]
+script = ExtResource("2_stebd")
+BulletScene = ExtResource("3_jbe1c")
+metadata/_custom_type_script = "uid://1ae07wbjgp54"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=550536826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.021)
+shape = SubResource("CylinderShape3D_3a6tt")
+
+[node name="VisibilityComponent" type="Node3D" parent="." unique_id=324947047]
+script = ExtResource("3_stebd")
+ViewRange = 8.0
+metadata/_custom_type_script = "uid://dftkftvwkf48v"

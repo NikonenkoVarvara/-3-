@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://tower.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://poison_bullet_3d.tscn" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="TowerColor"]
+albedo_color = Color(0.22, 0.74, 0.34, 1)
+
+[sub_resource type="SphereMesh" id="TowerMesh"]
+material = SubResource("TowerColor")
+radius = 0.82
+height = 1.55
+
+[node name="PoisonTower" instance=ExtResource("1")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("TowerMesh")
+surface_material_override/0 = SubResource("TowerColor")
+
+[node name="ShootComponent" parent="." index="2"]
+FireRate = 0.8
+BulletScene = ExtResource("2")

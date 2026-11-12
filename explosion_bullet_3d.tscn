@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://bullet_3d.tscn" id="1"]
+[ext_resource type="Script" path="res://ExplosionComponent.cs" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="BulletColor"]
+albedo_color = Color(0.83, 1, 0.23, 1)
+
+[node name="ExplosionBullet" instance=ExtResource("1")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+material_override = SubResource("BulletColor")
+
+[node name="DamagingComponent" parent="." index="1"]
+script = ExtResource("2")
+Damage = 30

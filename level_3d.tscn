@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://scmocwmus02c"]
+
+[ext_resource type="Script" uid="uid://djn7cyre75ul1" path="res://GameManager.cs" id="1_s33hs"]
+[ext_resource type="Texture2D" uid="uid://dbi7q4mfq73en" path="res://картинка_пол.png" id="2_g0ym2"]
+[ext_resource type="PackedScene" uid="uid://cstivh23u3t52" path="res://tower.tscn" id="3_bun11"]
+[ext_resource type="PackedScene" uid="uid://cohmikoj6r580" path="res://enemy_tower.tscn" id="4_dr35b"]
+[ext_resource type="PackedScene" uid="uid://bbaiarmsi4oii" path="res://enemy_tower_2.tscn" id="7_wbbdk"]
+[ext_resource type="PackedScene" path="res://core.tscn" id="8_core"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="9_player"]
+[ext_resource type="PackedScene" path="res://crawler.tscn" id="10_crawler"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mtfk"]
+albedo_texture = ExtResource("2_g0ym2")
+
+[sub_resource type="BoxMesh" id="BoxMesh_s33hs"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s33hs"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="Environment" id="Environment_s33hs"]
+
+[node name="LEVEL3D" type="Node3D" unique_id=1099113506]
+script = ExtResource("1_s33hs")
+
+[node name="floor" type="Node3D" parent="." unique_id=1692876371]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=1548949380]
+material_override = SubResource("StandardMaterial3D_6mtfk")
+mesh = SubResource("BoxMesh_s33hs")
+
+[node name="Tower3D" type="StaticBody3D" parent="floor" unique_id=1229639986]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/Tower3D" unique_id=1629948987]
+shape = SubResource("BoxShape3D_s33hs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=190422707]
+environment = SubResource("Environment_s33hs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=52556749]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 0, 0, 0)
+light_energy = 0.85
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1180485879]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 14, 1.5689659e-07)
+
+[node name="tower" parent="." unique_id=1180821927 instance=ExtResource("3_bun11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
+[node name="enemy_tower" parent="." unique_id=51730807 instance=ExtResource("4_dr35b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.779929, 0, -8.186024)
+
+[node name="enemy_tower2" parent="." unique_id=95376791 instance=ExtResource("7_wbbdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.209826, 0, 7.5863004)
+
+[node name="Core" parent="." unique_id=691961287 instance=ExtResource("8_core")]
+
+[node name="Player" parent="." unique_id=260655069 instance=ExtResource("9_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
+
+[node name="Crawler" parent="." unique_id=2145573091 instance=ExtResource("10_crawler")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
